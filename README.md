@@ -1,7 +1,8 @@
 # jzExpand
-
-饺子视频改版(简易改) ----- 基于饺子视频进行二次修改<br/>
-(该空间 还包括一个基于Android mediaPlayer 的一个音频播放 属于我自己写的 最近项目需要就自己写了个)<br/>
+欢迎转载,欢迎评论,欢迎吐槽,欢迎提意见 咱邮箱是:1145418863@qq.com<br/>
+        如有某位大佬偶然看到 还望得到指点<br/>
+饺子视频改版(jiaozivideoplayer) ----- 基于饺子视频进行二次修改<br/>
+[该空间 还包括一个基于Android mediaPlayer 的一个音频播放  (mymusicplayer)  属于我自己写的 最近项目需要就自己写了个]<br/>
   添加倍速<br/>
   添加分集<br/>
   弹框样式修改<br/>
@@ -64,5 +65,14 @@
                             , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
                 }
             });
+
+    ps:
+        在项目中需要将某些图标更替 可直接在drawable中以同名形式替换
+        饺子视频在使用的时候需要大面积的UI更改可重写布局文件 jz_layout_standard.xml (饺子原有id建议不要删除 请用逻辑隐藏或者view隐藏)
+        将JZVideoPlayerStandard.Java中的R.layout.jz_layout_standard替换为你自己重新写的布局(如果是在原布局上更改 则不需替换)
+        音频播放 同上
+
+        欢迎转载,欢迎评论,欢迎吐槽,欢迎提意见 咱邮箱是:1145418863@qq.com
+        如有某位大佬偶然看到 还望得到指点
 
   感谢饺子视频团队(或某大佬)提供的开源框架 万分感谢 再次感谢~
