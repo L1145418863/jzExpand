@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cc000000">
+
+    <TextView
+        android:id="@+id/notfind_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="57dp"
+        android:layout_marginBottom="25dp"
+        android:text="倍速"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/notfind_text2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/my_jz_video_bs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="45dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/notfind_text1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/notfind_text1"
+        app:layout_constraintTop_toTopOf="@+id/notfind_text1">
+
+        <RadioButton
+            android:id="@+id/my_jz_video_bs1_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="1X"
+            android:textColor="#D8B076"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_jz_video_bs1_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:button="@null"
+            android:text="1.25X"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_jz_video_bs1_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:button="@null"
+            android:text="1.5X"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_jz_video_bs2_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:button="@null"
+            android:text="2X"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/notfind_text2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:background="#50FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/notfind_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="画质"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/my_jz_video_qx"
+        app:layout_constraintStart_toStartOf="@+id/notfind_text1"
+        app:layout_constraintTop_toTopOf="@+id/my_jz_video_qx" />
+
+    <RadioGroup
+        android:id="@+id/my_jz_video_qx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/my_jz_video_bs"
+        app:layout_constraintStart_toStartOf="@+id/my_jz_video_bs"
+        app:layout_constraintTop_toBottomOf="@+id/notfind_text2">
+
+        <RadioButton
+            android:id="@+id/my_jz_video_qxbq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="标清"
+            android:textColor="#D8B076"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_jz_video_qxgq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="高清"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#D8B076"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#D8B076"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>

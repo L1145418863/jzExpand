@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jz_dialog_selection_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:gravity="center"
+    android:padding="20dp"
+    android:text="第1集"
+    android:textColor="#FFF"
+    android:textSize="18sp"/>

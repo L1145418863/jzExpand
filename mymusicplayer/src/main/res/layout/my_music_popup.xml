@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99000000">
+
+    <RadioGroup
+        android:id="@+id/my_music_bsgroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="倍速"
+            android:textColor="#FFF"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/my_music_bsbtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="1X"
+            android:textColor="#D8B076"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_music_bsbtn1_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="1.25X"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_music_bsbtn1_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="1.5X"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/my_music_bsbtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="2X"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/notfind_line"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginRight="56dp"
+        android:background="#33FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_music_bsgroup" />
+
+    <SeekBar
+        android:id="@+id/my_music_sound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginRight="66dp"
+        android:max="10"
+        android:maxHeight="2dp"
+        android:progress="10"
+        android:progressDrawable="@drawable/popupbg_music_seek_bar"
+        android:thumb="@drawable/music_popup_seek_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notfind_line" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:src="@drawable/music_play_sound1"
+        app:layout_constraintBottom_toBottomOf="@+id/my_music_sound"
+        app:layout_constraintStart_toEndOf="@+id/my_music_sound"
+        app:layout_constraintTop_toTopOf="@+id/my_music_sound" />
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="18dp"
+        android:src="@drawable/music_play_sound2"
+        app:layout_constraintBottom_toBottomOf="@+id/my_music_sound"
+        app:layout_constraintEnd_toStartOf="@+id/my_music_sound"
+        app:layout_constraintTop_toTopOf="@+id/my_music_sound" />
+
+</android.support.constraint.ConstraintLayout>

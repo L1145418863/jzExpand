@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="44">
+
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="56"
+        android:background="#cc000000">
+
+        <TextView
+            android:id="@+id/notfind_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="57dp"
+            android:layout_marginBottom="20dp"
+            android:text="倍速"
+            android:textColor="#ffffffff"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/notfind_text2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/my_jz_video_bs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="35dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/notfind_text1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/notfind_text1"
+            app:layout_constraintTop_toTopOf="@+id/notfind_text1">
+
+            <RadioButton
+                android:id="@+id/my_jz_video_bs1_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="1X"
+                android:textColor="#D8B076"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/my_jz_video_bs1_25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:button="@null"
+                android:text="1.25X"
+                android:textColor="#ffffffff"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/my_jz_video_bs1_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:button="@null"
+                android:text="1.5X"
+                android:textColor="#ffffffff"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/my_jz_video_bs2_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:button="@null"
+                android:text="2X"
+                android:textColor="#ffffffff"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/notfind_text2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="48dp"
+            android:background="#50FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/notfind_text4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/notfind_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="画质"
+            android:textColor="#ffffffff"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/my_jz_video_qx"
+            app:layout_constraintStart_toStartOf="@+id/notfind_text1"
+            app:layout_constraintTop_toTopOf="@+id/my_jz_video_qx" />
+
+        <RadioGroup
+            android:id="@+id/my_jz_video_qx"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/notfind_text4"
+            app:layout_constraintEnd_toEndOf="@+id/my_jz_video_bs"
+            app:layout_constraintStart_toStartOf="@+id/my_jz_video_bs"
+            app:layout_constraintTop_toBottomOf="@+id/notfind_text2">
+
+            <RadioButton
+                android:id="@+id/my_jz_video_qxbq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="标清"
+                android:textColor="#D8B076"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/my_jz_video_qxgq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:button="@null"
+                android:text="高清"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/notfind_text4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="#50FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SeekBar
+            android:id="@+id/my_video_sound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="66dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="66dp"
+            android:max="10"
+            android:maxHeight="2dp"
+            android:progress="10"
+            android:progressDrawable="@drawable/popupbg_video_seek_bar"
+            android:thumb="@drawable/video_popup_seek_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notfind_text4" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:src="@drawable/video_play_sound1"
+            app:layout_constraintBottom_toBottomOf="@+id/my_video_sound"
+            app:layout_constraintStart_toEndOf="@+id/my_video_sound"
+            app:layout_constraintTop_toTopOf="@+id/my_video_sound" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="18dp"
+            android:src="@drawable/video_play_sound2"
+            app:layout_constraintBottom_toBottomOf="@+id/my_video_sound"
+            app:layout_constraintEnd_toStartOf="@+id/my_video_sound"
+            app:layout_constraintTop_toTopOf="@+id/my_video_sound" />
+
+        <SeekBar
+            android:id="@+id/my_video_brightness"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="66dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="66dp"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="60"
+            android:progressDrawable="@drawable/popupbg_video_seek_bar"
+            android:thumb="@drawable/video_popup_seek_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_video_sound" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:src="@drawable/video_play_sound1"
+            app:layout_constraintBottom_toBottomOf="@+id/my_video_brightness"
+            app:layout_constraintStart_toEndOf="@+id/my_video_brightness"
+            app:layout_constraintTop_toTopOf="@+id/my_video_brightness" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="18dp"
+            android:src="@drawable/video_play_sound2"
+            app:layout_constraintBottom_toBottomOf="@+id/my_video_brightness"
+            app:layout_constraintEnd_toStartOf="@+id/my_video_brightness"
+            app:layout_constraintTop_toTopOf="@+id/my_video_brightness" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

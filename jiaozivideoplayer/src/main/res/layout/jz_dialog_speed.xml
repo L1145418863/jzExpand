@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="5.3"
+        android:layout_height="match_parent"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/jz_speed_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4.7"
+        android:background="#cc000000"
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp">
+        <TextView
+            android:id="@+id/jz_speed_20"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="2.0X"
+            android:textSize="18sp"
+            android:textColor="#FFF" />
+        <TextView
+            android:id="@+id/jz_speed_15"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="1.5X"
+            android:textSize="18sp"
+            android:textColor="#FFF" />
+        <TextView
+            android:id="@+id/jz_speed_12"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="1.25X"
+            android:textSize="18sp"
+            android:textColor="#FFF" />
+
+        <TextView
+            android:id="@+id/jz_speed_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="1.0X"
+            android:textSize="18sp"
+            android:textColor="#D8B076" />
+
+        <TextView
+            android:id="@+id/jz_speed_07"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="0.7X"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textColor="#FFF" />
+
+    </LinearLayout>
+</LinearLayout>
