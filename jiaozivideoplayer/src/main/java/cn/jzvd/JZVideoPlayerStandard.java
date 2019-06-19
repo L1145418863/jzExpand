@@ -79,7 +79,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
 
     private BroadcastReceiver battertReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+            String action = intent.getAction();//广播接收
             if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
                 int level = intent.getIntExtra("level", 0);
                 int scale = intent.getIntExtra("scale", 100);
@@ -100,7 +100,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     }
 
     @Override
-    public void init(Context context) {
+    public void init(Context context) {//初始化 部分view 的布局
         super.init(context);
         batteryTimeLayout = findViewById(R.id.battery_time_layout);
         bottomProgressBar = findViewById(R.id.bottom_progress);
@@ -125,37 +125,45 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         mRetryBtn.setOnClickListener(this);
     }
 
+    /**
+     * 设置播放形式和url
+     *
+     * @param dataSourceObjects  播放的url 以及 清晰度
+     * @param defaultUrlMapIndex 如果有清晰度 判断是从那个清晰度开始播放
+     * @param screen             视频界面 的展示方式
+     * @param objects            视频标题
+     */
     public void setUp(Object[] dataSourceObjects, int defaultUrlMapIndex, int screen, Object... objects) {
         super.setUp(dataSourceObjects, defaultUrlMapIndex, screen, objects);
         if (objects.length != 0) titleTextView.setText(objects[0].toString());
-        if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
-            fullscreenButton.setImageResource(R.drawable.jz_shrink);
-            fullscreenButton.setVisibility(View.GONE);
+        if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {//是否占满全屏
+            fullscreenButton.setImageResource(R.drawable.jz_shrink);//全屏按钮
+            fullscreenButton.setVisibility(View.GONE);//如需全屏展示 则设置VISIBLE
             backButton.setVisibility(View.VISIBLE);
             tinyBackImageView.setVisibility(View.INVISIBLE);
             batteryTimeLayout.setVisibility(View.GONE);
             jz_this_little.setVisibility(View.GONE);
             jz_this_big.setVisibility(View.VISIBLE);
-            if (((LinkedHashMap) dataSourceObjects[0]).size() == 1) {
+            if (((LinkedHashMap) dataSourceObjects[0]).size() == 1) {//是否展示清晰度按钮
                 clarity.setVisibility(GONE);
-            } else {
+            } else {//展示清晰度按钮并赋予文字
                 clarity.setText(JZUtils.getKeyFromDataSource(dataSourceObjects, currentUrlMapIndex));
                 clarity.setVisibility(View.VISIBLE);
             }
             //显示倍速按钮
             video_speed.setVisibility(View.VISIBLE);
-            video_speed.setText(VariableUtil.speedSize + "X");
+            video_speed.setText(VariableUtil.speedSize + "X");//倍速
             //显示分集按钮
             select_index.setText(isSelection ? "选集" : "");
             //显示下一集按钮
             jz_btn_next.setVisibility(isSelection ? View.VISIBLE : View.GONE);
 
-            changeStartButtonSize((int) getResources().getDimension(R.dimen.jz_start_button_w_h_fullscreen));
+            changeStartButtonSize((int) getResources().getDimension(R.dimen.jz_start_button_w_h_fullscreen)); //设置按键的大小
         } else if (currentScreen == SCREEN_WINDOW_NORMAL
-                || currentScreen == SCREEN_WINDOW_LIST) {
-            fullscreenButton.setImageResource(R.drawable.jz_enlarge);
+                || currentScreen == SCREEN_WINDOW_LIST) {//全屏播放
+            fullscreenButton.setImageResource(R.drawable.jz_enlarge);//全屏按钮
             fullscreenButton.setVisibility(View.VISIBLE);
-            backButton.setVisibility(View.GONE);
+            backButton.setVisibility(View.GONE);//返回按钮
             //隐藏倍速按钮
             video_speed.setVisibility(View.GONE);
             //隐藏分集按钮
@@ -169,7 +177,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             changeStartButtonSize((int) getResources().getDimension(R.dimen.jz_start_button_w_h_normal));
             batteryTimeLayout.setVisibility(View.GONE);
             clarity.setVisibility(View.GONE);
-        } else if (currentScreen == SCREEN_WINDOW_TINY) {
+        } else if (currentScreen == SCREEN_WINDOW_TINY) {//小屏幕播放
             tinyBackImageView.setVisibility(View.VISIBLE);
             //隐藏倍速按钮
             video_speed.setVisibility(View.GONE);
@@ -195,14 +203,19 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     //播放速度，默认1
     public float speeding = VariableUtil.speedSize;
 
-    public float getSpeeding() {
+    public float getSpeeding() {//获取当前倍速
         return speeding;
     }
 
-    public void setSpeeding(float speeding) {
+    public void setSpeeding(float speeding) {//修改播放速度
         this.speeding = speeding;
     }
 
+    /**
+     * 修改 播放时和加载时的控件大小
+     *
+     * @param size 大小 获取的 在内部进行了一次计算
+     */
     public void changeStartButtonSize(int size) {
         ViewGroup.LayoutParams lp = startButton.getLayoutParams();
         lp.height = (int) (size / 3.5);
@@ -216,6 +229,8 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     }
 
     /**
+     * 分集视频
+     *
      * @param moreVideo 更多视频
      */
     public void addSelection(List<Object[]> moreVideo) {
@@ -235,7 +250,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutId() {//布局id
         return R.layout.jz_layout_mystandard;
     }
 
@@ -347,20 +362,20 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             }
         } else if (i == R.id.surface_container) {
             startDismissControlViewTimer();
-        } else if (i == R.id.back) {
+        } else if (i == R.id.back) {//返回按钮
             backPress();
-        } else if (i == R.id.back_tiny) {
+        } else if (i == R.id.back_tiny) {//小屏幕 返回
             if (JZVideoPlayerManager.getFirstFloor().currentScreen == JZVideoPlayer.SCREEN_WINDOW_LIST) {
                 quitFullscreenOrTinyWindow();
             } else {
                 backPress();
             }
-        } else if (i == R.id.clarity) {//选择清晰度
+        } else if (i == R.id.clarity) {//画质更改设置
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             LinearLayout clarAlitLayout = (LinearLayout) inflater.inflate(R.layout.jz_dialog_clarity, null);
             final LinearLayout layout = clarAlitLayout.findViewById(R.id.video_quality_wrapper_area);
-            setSpeed(1f, null);
+            setSpeed(1f, null);//改变进度 让进度变成1.0倍
             OnClickListener mQualityListener = new OnClickListener() {
                 public void onClick(View v) {
                     int index = (int) v.getTag();
@@ -420,7 +435,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     }
 
     @Override
-    public void showWifiDialog() {
+    public void showWifiDialog() {//提示用户当前网络环境
         super.showWifiDialog();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(getResources().getString(R.string.tips_not_wifi));
@@ -465,6 +480,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 点击UI的变化
+     */
     public void onClickUiToggle() {
         if (bottomContainer.getVisibility() != View.VISIBLE) {
             setSystemTimeAndBattery();
@@ -491,6 +509,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 显示 时间
+     */
     public void setSystemTimeAndBattery() {
         SimpleDateFormat dateFormater = new SimpleDateFormat("HH:mm");
         Date date = new Date();
@@ -506,6 +527,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 电量变化 广播监听 暂时隐藏该view
+     */
     public void setBatteryLevel() {
         int percent = LAST_GET_BATTERYLEVEL_PERCENT;
         if (percent < 15) {
@@ -761,6 +785,15 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         void videoEndListener(int index);
     }
 
+    /**
+     * 显示 用户Touch屏幕后滑动指令 快进后退
+     *
+     * @param deltaX
+     * @param seekTime
+     * @param seekTimePosition
+     * @param totalTime
+     * @param totalTimeDuration
+     */
     @Override
     public void showProgressDialog(float deltaX, String seekTime, long seekTimePosition, String totalTime, long totalTimeDuration) {
         super.showProgressDialog(deltaX, seekTime, seekTimePosition, totalTime, totalTimeDuration);
@@ -787,6 +820,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         onCLickUiToggleToClear();
     }
 
+    /**
+     * 关闭弹框
+     */
     @Override
     public void dismissProgressDialog() {
         super.dismissProgressDialog();
@@ -795,6 +831,12 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 改变音量的弹框
+     *
+     * @param deltaY        y轴距离
+     * @param volumePercent 声音大小
+     */
     @Override
     public void showVolumeDialog(float deltaY, int volumePercent) {
         super.showVolumeDialog(deltaY, volumePercent);
@@ -823,6 +865,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         onCLickUiToggleToClear();
     }
 
+    /**
+     * 关闭 改变音量弹框
+     */
     @Override
     public void dismissVolumeDialog() {
         super.dismissVolumeDialog();
@@ -831,6 +876,10 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 展示亮度弹框
+     * @param brightnessPercent 亮度的值
+     */
     @Override
     public void showBrightnessDialog(int brightnessPercent) {
         super.showBrightnessDialog(brightnessPercent);
@@ -853,6 +902,9 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         onCLickUiToggleToClear();
     }
 
+    /**
+     * 关闭亮度弹框
+     */
     @Override
     public void dismissBrightnessDialog() {
         super.dismissBrightnessDialog();
@@ -861,6 +913,11 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         }
     }
 
+    /**
+     * 创建 弹框的view
+     * @param localView
+     * @return
+     */
     public Dialog createDialogWithView(View localView) {
         Dialog dialog = new Dialog(getContext(), R.style.jz_style_dialog_progress);
         dialog.setContentView(localView);

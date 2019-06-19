@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.lzg.musicplayer.MyMusicPlayerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import cn.jzvd.JZVideoPlayerStandard;
 public class MainActivity extends AppCompatActivity {
 
     private JZVideoPlayerStandard jzvideoplayerstandard;
+    private MyMusicPlayerView musicView;
     private String[] mediaName = {"普通", "原画"};//可以做选集
     private List<Object[]> list = new ArrayList<Object[]>();
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         jzvideoplayerstandard = (JZVideoPlayerStandard) findViewById(R.id.wodeshipin);
+        musicView = (MyMusicPlayerView) findViewById(R.id.my_music_view);
+
 //--------------------------------------------------------------------------------
         Object[] objects = new Object[3];
         LinkedHashMap map = new LinkedHashMap();
@@ -93,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         jzvideoplayerstandard.startVideo();
         //设置全屏播放
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
+
+        //---------------------------------音频-------------------
+        musicView.setUp("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3","http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg");
 
     }
 

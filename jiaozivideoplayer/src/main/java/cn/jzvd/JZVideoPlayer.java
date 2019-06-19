@@ -588,9 +588,12 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showUnFillPopup() {
+
+        int height = textureViewContainer.getHeight();
+
         final PopupWindow unFillPopup = new PopupWindow(this);
         unFillPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        unFillPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        unFillPopup.setHeight(height);
         unFillPopup.setAnimationStyle(R.style.jz_style_dialog_progress);
         View popupVeiw = View.inflate(this.getContext(), R.layout.jz_dialog_more_unfilled, null);
         unFillPopup.setContentView(popupVeiw);
@@ -884,7 +887,6 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
                 case MotionEvent.ACTION_DOWN:
                     Log.i(TAG, "onTouch surfaceContainer actionDown [" + this.hashCode() + "] ");
                     mTouchingProgressBar = true;
-
                     mDownX = x;
                     mDownY = y;
                     mChangeVolume = false;
@@ -1511,7 +1513,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         JZMediaManager.instance().jzMediaInterface = mediaInterface;
     }
 
-    //TODO 是否有用
+    //TODO 是否有用  答曰:否
     public void onSeekComplete() {
 
     }
