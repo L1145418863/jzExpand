@@ -17,6 +17,7 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -209,6 +210,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     }
 
     public static boolean backPress() {
+        VariableUtil.isFullScreen = false;//是否处于全屏状态
         Log.i(TAG, "backPress");
         if ((System.currentTimeMillis() - CLICK_QUIT_FULLSCREEN_TIME) < FULL_SCREEN_NORMAL_DELAY)
             return false;
@@ -438,7 +440,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     }
 
     public void setUp(Object[] dataSourceObjects, int defaultUrlMapIndex, int screen, Object... objects) {
-        if(VariableUtil.list==null || VariableUtil.list.size() == 0){
+        if (VariableUtil.list == null || VariableUtil.list.size() == 0) {
             VariableUtil.list = new ArrayList<>();
             VariableUtil.list.add(dataSourceObjects);
         }
@@ -539,17 +541,18 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
             //下一集按钮
             int listSelect = VariableUtil.listSelect;
             ChangedVideo(listSelect + 1, VariableUtil.list);
-        }else if (i == R.id.more) {
+        } else if (i == R.id.more) {
             //弹框: 全类型弹框 判断是否是全屏状态
-            if(VariableUtil.isFullScreen){
-                Log.e("更多设置弹框","全屏");
+            if (VariableUtil.isFullScreen) {
+                Log.e("更多设置弹框", "全屏");
                 showFillPopup();
-            }else{
-                Log.e("更多设置弹框","非全屏");
+            } else {
+                Log.e("更多设置弹框", "非全屏");
                 showUnFillPopup();
             }
         }
     }
+
     /**
      * 非全屏状态下的更多设置弹框
      */
@@ -565,6 +568,12 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         unFillPopup.setFocusable(true);
         unFillPopup.showAsDropDown(jz_show_popup);
 
+        RadioGroup group = popupVeiw.findViewById(R.id.my_jz_video_bs);
+        setDoubleSpeed(group);
+
+        final LinearLayout ayout = popupVeiw.findViewById(R.id.my_jz_video_qx);
+        SetClarity(unFillPopup, ayout);
+
         popupVeiw.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -573,6 +582,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         });
 
     }
+
     /**
      * 非全屏状态下的更多设置弹框
      */
@@ -588,13 +598,64 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         unFillPopup.setFocusable(true);
         unFillPopup.showAsDropDown(jz_show_popup);
 
+        final LinearLayout ayout = popupVeiw.findViewById(R.id.my_jz_video_qx);
+        SetClarity(unFillPopup, ayout);
+
         popupVeiw.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 unFillPopup.dismiss();
             }
         });
+    }
 
+    /**
+     * 设置倍速
+     *
+     * @param group RadioGroup
+     */
+    private void setDoubleSpeed(RadioGroup group) {
+        float speedSize = VariableUtil.speedSize;
+    }
+
+    /**
+     * 选择清晰度
+     *
+     * @param unFillPopup
+     * @param layout
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    private void SetClarity(final PopupWindow unFillPopup, final LinearLayout layout) {
+        setSpeed(1f, null);
+        OnClickListener mQualityListener = new OnClickListener() {
+            public void onClick(View v) {
+                int index = (int) v.getTag();
+                onStatePreparingChangingUrl(index, getCurrentPositionWhenPlaying());////////////
+                for (int j = 0; j < layout.getChildCount(); j++) {//设置点击之后的颜色
+                    if (j == currentUrlMapIndex) {
+                        ((TextView) layout.getChildAt(j)).setTextColor(Color.parseColor("#D8B076"));
+                    } else {
+                        ((TextView) layout.getChildAt(j)).setTextColor(Color.parseColor("#ffffff"));
+                    }
+                }
+                if (unFillPopup != null) {
+                    unFillPopup.dismiss();
+                }
+            }
+        };
+
+        for (int j = 0; j < ((LinkedHashMap) dataSourceObjects[0]).size(); j++) {
+            String key = JZUtils.getKeyFromDataSource(dataSourceObjects, j);
+            TextView clarityItem = (TextView) View.inflate(getContext(), R.layout.jz_layout_clarity_item2, null);
+            clarityItem.setText(key);
+            clarityItem.setTag(j);
+            //clarityItem.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
+            layout.addView(clarityItem, j);
+            clarityItem.setOnClickListener(mQualityListener);
+            if (j == currentUrlMapIndex) {
+                clarityItem.setTextColor(Color.parseColor("#D8B076"));
+            }
+        }
     }
 
     /**
@@ -662,14 +723,14 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     /**
      * 分集播放
      *
-     * @param listSelect    分集的下标
-     * @param list 集 合
+     * @param listSelect 分集的下标
+     * @param list       集 合
      * @return 判断条件
      */
     private boolean ChangedVideo(int listSelect, List<Object[]> list) {
         if (list.size() > listSelect) {
             VariableUtil.listSelect = listSelect;
-            Log.e("listSelect",""+listSelect);
+            Log.e("listSelect", "" + listSelect);
             dataSourceObjects = list.get(listSelect);
             if (dataSourceObjects == null || JZUtils.getCurrentFromDataSource(dataSourceObjects, currentUrlMapIndex) == null) {
                 Toast.makeText(getContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
@@ -752,9 +813,9 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void setSpeed(float speed, LinearLayout group) {
-        video_speed.setText(speed + "X");
         mySpeed = speed;
         VariableUtil.speedSize = speed;
+        video_speed.setText(VariableUtil.speedSize + "X");
         if (popupWindow != null) {
             popupWindow.dismiss();
         }
@@ -766,6 +827,12 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         JZMediaManager.instance().setSpeed(speed);
     }
 
+    /**
+     * radioGroup选中的
+     *
+     * @param speed
+     * @param group
+     */
     private void childColor(float speed, LinearLayout group) {
         for (int i = 0; i < group.getChildCount(); i++) {
             TextView childAt = (TextView) group.getChildAt(i);
@@ -1285,6 +1352,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     }
 
     public void startWindowFullscreen() {
+        VariableUtil.isFullScreen = true;//是否处于全屏状态
         Log.i(TAG, "startWindowFullscreen " + " [" + this.hashCode() + "] ");
         hideSupportActionBar(getContext());
 

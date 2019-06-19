@@ -136,7 +136,6 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             batteryTimeLayout.setVisibility(View.GONE);
             jz_this_little.setVisibility(View.GONE);
             jz_this_big.setVisibility(View.VISIBLE);
-            VariableUtil.isFullScreen = true;//是否处于全屏状态
             if (((LinkedHashMap) dataSourceObjects[0]).size() == 1) {
                 clarity.setVisibility(GONE);
             } else {
@@ -156,7 +155,6 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             fullscreenButton.setImageResource(R.drawable.jz_enlarge);
             fullscreenButton.setVisibility(View.VISIBLE);
             backButton.setVisibility(View.GONE);
-            VariableUtil.isFullScreen = false;//是否处于全屏状态
             //隐藏倍速按钮
             video_speed.setVisibility(View.GONE);
             //隐藏分集按钮
@@ -206,16 +204,17 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
 
     public void changeStartButtonSize(int size) {
         ViewGroup.LayoutParams lp = startButton.getLayoutParams();
-        lp.height = (int) (size / 1.5);
-        lp.width = (int) (size / 1.5);
+        lp.height = (int) (size / 3.5);
+        lp.width = (int) (size / 3.5);
+        lp = jz_btn_next.getLayoutParams();
+        lp.height = (int) (size / 3.5);
+        lp.width = (int) (size / 3.5);
         lp = loadingProgressBar.getLayoutParams();
-        lp.height = (int) (size / 1.5);
-        lp.width = (int) (size / 1.5);
+        lp.height = (int) (size);
+        lp.width = (int) (size);
     }
 
     /**
-     * 要放在设置清晰度之前 使用
-     *
      * @param moreVideo 更多视频
      */
     public void addSelection(List<Object[]> moreVideo) {

@@ -3,6 +3,7 @@ package com.example.administrator.newjz;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("打印","打印");
+        Log.e("打印", "打印");
     }
 
     private void initView() {
@@ -56,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
         objects1[2] = new HashMap<>();
         ((HashMap) objects1[2]).put("key", "value");
 //--------------------------------------------------------------------------------
-        list.add(objects1);
         list.add(objects);
+        list.add(objects1);
         /*list.add(objects);
         list.add(objects1);
         list.add(objects);
         list.add(objects1);*/
 
         jzvideoplayerstandard.addSelection(list);
-
+        jzvideoplayerstandard.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(this)
                 .load("http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg")
                 .into(jzvideoplayerstandard.thumbImageView);
@@ -82,12 +84,27 @@ public class MainActivity extends AppCompatActivity {
         jzvideoplayerstandard.setonVideoEndLinstener(new JZVideoPlayerStandard.onVideoEndLinstener() {
             @Override
             public void videoEndListener(int index) {
-                Toast.makeText(MainActivity.this, "第"+(index+1)+"集播放结束", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "第" + (index + 1) + "集播放结束", Toast.LENGTH_SHORT).show();
                 jzvideoplayerstandard.setUp(list.get(index), 0
                         , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
             }
         });
         jzvideoplayerstandard.startVideo();
-
     }
+
+
+    @Override//点击返回键不关闭当前activity
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
+    }
+
 }

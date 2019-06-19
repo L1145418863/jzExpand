@@ -33,9 +33,10 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/jz_bottom_bg"
+        android:paddingTop="30dp"
         android:visibility="invisible">
 
         <LinearLayout
@@ -44,9 +45,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -141,9 +146,10 @@
 
             <ImageView
                 android:id="@+id/jz_btn_next"
-                android:layout_width="25dp"
+                android:layout_width="18dp"
                 android:layout_height="25dp"
-                android:src="@drawable/jz_forward_icon"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/next"
                 app:layout_constraintBottom_toBottomOf="@+id/current_big"
                 app:layout_constraintEnd_toStartOf="@+id/current_big"
                 app:layout_constraintTop_toTopOf="@+id/current_big" />
@@ -152,7 +158,7 @@
                 android:id="@+id/current_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="110dp"
                 android:text="00:00"
                 android:textColor="#ffffff"
                 app:layout_constraintBottom_toBottomOf="@+id/video_speed"
@@ -184,6 +190,7 @@
                 android:id="@+id/video_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
                 android:padding="5dp"
                 android:text="1.0X"
                 android:textColor="#FFF"
@@ -195,6 +202,7 @@
                 android:id="@+id/clarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
                 android:clickable="true"
                 android:padding="5dp"
                 android:text="画质"
@@ -209,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="18dp"
                 android:clickable="true"
                 android:padding="5dp"
                 android:text="选集"
@@ -222,11 +230,11 @@
 
         <ImageView
             android:id="@+id/fullscreen"
-            android:layout_width="52.5dp"
+            android:layout_width="52dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="22dp"
+            android:paddingLeft="17dp"
+            android:paddingRight="18dp"
             android:scaleType="centerInside"
             android:src="@drawable/jz_enlarge"
             android:visibility="visible"
@@ -267,21 +275,22 @@
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="23dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:paddingStart="12dp"
-            android:paddingLeft="12dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="15dp"
             android:scaleType="centerInside"
             android:src="@drawable/jz_click_back_selector" />
 
         <ImageView
             android:id="@+id/more"
             android:layout_width="40dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:padding="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/jz_more" />
@@ -291,17 +300,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/battery_time_layout"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@+id/more"
+            android:layout_toLeftOf="@+id/more"
             android:layout_toEndOf="@+id/back"
             android:layout_toRightOf="@+id/back"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:gravity="center"
+            android:maxLines="1"
             android:textColor="#ffffff"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/battery_time_layout"

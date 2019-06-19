@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="@+id/notfind_text1"
         app:layout_constraintTop_toTopOf="@+id/my_jz_video_qx" />
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/my_jz_video_qx"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -103,45 +103,6 @@
         app:layout_constraintStart_toStartOf="@+id/my_jz_video_bs"
         app:layout_constraintTop_toBottomOf="@+id/notfind_text2">
 
-        <RadioButton
-            android:id="@+id/my_jz_video_qxbq"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:text="标清"
-            android:textColor="#D8B076"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/my_jz_video_qxgq"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:text="高清"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text=""
-            android:textColor="#D8B076"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text=""
-            android:textColor="#D8B076"
-            android:textSize="16sp" />
-    </RadioGroup>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
