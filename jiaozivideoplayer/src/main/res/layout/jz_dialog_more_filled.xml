@@ -9,21 +9,21 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="44">
+        android:layout_weight="42">
 
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="56"
+        android:layout_weight="58"
         android:background="#cc000000">
 
         <TextView
             android:id="@+id/notfind_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="57dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginBottom="20dp"
             android:text="倍速"
             android:textColor="#ffffffff"
@@ -31,11 +31,11 @@
             app:layout_constraintBottom_toTopOf="@+id/notfind_text2"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <RadioGroup
+        <LinearLayout
             android:id="@+id/my_jz_video_bs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="35dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/notfind_text1"
@@ -43,45 +43,45 @@
             app:layout_constraintStart_toEndOf="@+id/notfind_text1"
             app:layout_constraintTop_toTopOf="@+id/notfind_text1">
 
-            <RadioButton
+            <TextView
                 android:id="@+id/my_jz_video_bs1_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:text="1X"
+                android:text="1.0X"
                 android:textColor="#D8B076"
                 android:textSize="18sp" />
 
-            <RadioButton
+            <TextView
                 android:id="@+id/my_jz_video_bs1_25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:button="@null"
                 android:text="1.25X"
                 android:textColor="#ffffffff"
                 android:textSize="18sp" />
 
-            <RadioButton
+            <TextView
                 android:id="@+id/my_jz_video_bs1_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:button="@null"
                 android:text="1.5X"
                 android:textColor="#ffffffff"
                 android:textSize="18sp" />
 
-            <RadioButton
+            <TextView
                 android:id="@+id/my_jz_video_bs2_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:button="@null"
-                android:text="2X"
+                android:text="2.0X"
                 android:textColor="#ffffffff"
                 android:textSize="18sp" />
-        </RadioGroup>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/notfind_text2"

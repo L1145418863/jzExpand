@@ -12,7 +12,16 @@
      也建议大家给我这个菜鸡点个start ☆ 也好有点动力 谢谢~~
      如有问题请大家指正 万分感谢
 
+
+全屏所有弹框 皆基于横屏开发 全屏竖屏状态会比较丑 待改~
+增加一条属性(饺子原带)可避免全屏时视频竖屏播放
+        //设置全屏播放
+        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
+
+
   使用示例<br/>
+
+    布局引用与原版一致
 
     //变量
     private String[] mediaName = {"普通", "原画"};//清晰度  如果不做清晰度可直接当做选集使用 属于饺子视频原
@@ -41,7 +50,7 @@
             list.add(objects1);
             list.add(objects);
 
-            jzvideoplayerstandard.addSelection(list);
+            jzvideoplayerstandard.addSelection(list);//不使用则无选集功能
 
             Glide.with(this)//图片 饺子视频的封面图
                     .load("http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg")
@@ -66,13 +75,13 @@
                 }
             });
 
-    ps:
-        在项目中需要将某些图标更替 可直接在drawable中以同名形式替换
-        饺子视频在使用的时候需要大面积的UI更改可重写布局文件 jz_layout_standard.xml (饺子原有id建议不要删除 请用逻辑隐藏或者view隐藏)
-        将JZVideoPlayerStandard.Java中的R.layout.jz_layout_standard替换为你自己重新写的布局(如果是在原布局上更改 则不需替换)
-        音频播放 同上
+ ps:
+     在项目中需要将某些图标更替 可直接在drawable中以同名形式替换
+     饺子视频在使用的时候需要大面积的UI更改可重写布局文件 jz_layout_standard.xml (饺子原有id建议不要删除 请用逻辑隐藏或者view隐藏)
+     将JZVideoPlayerStandard.Java中的R.layout.jz_layout_standard替换为你自己重新写的布局(如果是在原布局上更改 则不需替换)
+     音频播放 同上
 
-        欢迎转载,欢迎评论,欢迎吐槽,欢迎提意见 咱邮箱是:1145418863@qq.com
-        如有某位大佬偶然看到 还望得到指点
+     欢迎转载,欢迎评论,欢迎吐槽,欢迎提意见 咱邮箱是:1145418863@qq.com
+     如有某位大佬偶然看到 还望得到指点
 
   感谢饺子视频团队(或某大佬)提供的开源框架 万分感谢 再次感谢~

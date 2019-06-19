@@ -568,9 +568,9 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         unFillPopup.setFocusable(true);
         unFillPopup.showAsDropDown(jz_show_popup);
 
-        RadioGroup group = popupVeiw.findViewById(R.id.my_jz_video_bs);
-        setDoubleSpeed(group);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            findGroupAndChild(popupVeiw);
+        }
         final LinearLayout ayout = popupVeiw.findViewById(R.id.my_jz_video_qx);
         SetClarity(unFillPopup, ayout);
 
@@ -586,6 +586,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     /**
      * 非全屏状态下的更多设置弹框
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void showUnFillPopup() {
         final PopupWindow unFillPopup = new PopupWindow(this);
         unFillPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -598,6 +599,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         unFillPopup.setFocusable(true);
         unFillPopup.showAsDropDown(jz_show_popup);
 
+        findGroupAndChild(popupVeiw);
         final LinearLayout ayout = popupVeiw.findViewById(R.id.my_jz_video_qx);
         SetClarity(unFillPopup, ayout);
 
@@ -610,12 +612,39 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     }
 
     /**
-     * 设置倍速
+     * 找弹框中的子条件
      *
-     * @param group RadioGroup
+     * @param popupVeiw 弹框布局
      */
-    private void setDoubleSpeed(RadioGroup group) {
-        float speedSize = VariableUtil.speedSize;
+    @TargetApi(Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void findGroupAndChild(View popupVeiw) {
+        final LinearLayout group = popupVeiw.findViewById(R.id.my_jz_video_bs);
+        popupVeiw.findViewById(R.id.my_jz_video_bs1_0).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSpeed(1f, group);
+            }
+        });
+        popupVeiw.findViewById(R.id.my_jz_video_bs1_25).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSpeed(1.25f, group);
+            }
+        });
+        popupVeiw.findViewById(R.id.my_jz_video_bs1_5).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSpeed(1.5f, group);
+            }
+        });
+        popupVeiw.findViewById(R.id.my_jz_video_bs2_0).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSpeed(2f, group);
+            }
+        });
+
     }
 
     /**

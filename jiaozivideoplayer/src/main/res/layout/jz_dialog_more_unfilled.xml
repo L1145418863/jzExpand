@@ -18,7 +18,7 @@
         app:layout_constraintBottom_toTopOf="@+id/notfind_text2"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/my_jz_video_bs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/notfind_text1"
         app:layout_constraintTop_toTopOf="@+id/notfind_text1">
 
-        <RadioButton
+        <TextView
             android:id="@+id/my_jz_video_bs1_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:textColor="#D8B076"
             android:textSize="16sp" />
 
-        <RadioButton
+        <TextView
             android:id="@+id/my_jz_video_bs1_25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:textColor="#ffffffff"
             android:textSize="16sp" />
 
-        <RadioButton
+        <TextView
             android:id="@+id/my_jz_video_bs1_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:textColor="#ffffffff"
             android:textSize="16sp" />
 
-        <RadioButton
+        <TextView
             android:id="@+id/my_jz_video_bs2_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:text="2X"
             android:textColor="#ffffffff"
             android:textSize="16sp" />
-    </RadioGroup>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/notfind_text2"

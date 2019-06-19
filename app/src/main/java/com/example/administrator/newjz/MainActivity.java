@@ -1,5 +1,6 @@
 package com.example.administrator.newjz;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         jzvideoplayerstandard.startVideo();
-    }
+        //设置全屏播放
+        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
 
+    }
 
     @Override//点击返回键不关闭当前activity
     public void onBackPressed() {

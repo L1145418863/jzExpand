@@ -144,6 +144,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             }
             //显示倍速按钮
             video_speed.setVisibility(View.VISIBLE);
+            video_speed.setText(VariableUtil.speedSize + "X");
             //显示分集按钮
             select_index.setText(isSelection ? "选集" : "");
             //显示下一集按钮
