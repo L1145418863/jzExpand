@@ -1,7 +1,7 @@
 # jzExpand
 欢迎转载,欢迎评论,欢迎吐槽,欢迎提意见 咱邮箱是:1145418863@qq.com<br/>
         如有某位大佬偶然看到 还望得到指点<br/>
-饺子视频改版(jiaozivideoplayer) ----- 基于饺子视频进行二次修改<br/>
+饺子视频改版(jiaozivideoplayer) ----- 基于饺子视频缝补<br/>
 [该空间 还包括一个基于Android mediaPlayer 的一个音频播放  (mymusicplayer)  属于我自己写的 最近项目需要就自己写了个]<br/>
   添加倍速<br/>
   添加分集<br/>
