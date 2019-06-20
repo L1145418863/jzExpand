@@ -160,6 +160,7 @@
         <ImageView
             android:layout_width="12dp"
             android:layout_height="18dp"
+            android:layout_marginRight="4dp"
             android:src="@drawable/video_play_sound2"
             app:layout_constraintBottom_toBottomOf="@+id/my_video_sound"
             app:layout_constraintEnd_toStartOf="@+id/my_video_sound"
@@ -182,17 +183,18 @@
             app:layout_constraintTop_toBottomOf="@+id/my_video_sound" />
 
         <ImageView
-            android:layout_width="20dp"
+            android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/video_play_sound1"
+            android:layout_marginLeft="2dp"
+            android:src="@drawable/video_play_brightness1"
             app:layout_constraintBottom_toBottomOf="@+id/my_video_brightness"
             app:layout_constraintStart_toEndOf="@+id/my_video_brightness"
             app:layout_constraintTop_toTopOf="@+id/my_video_brightness" />
 
         <ImageView
-            android:layout_width="12dp"
-            android:layout_height="18dp"
-            android:src="@drawable/video_play_sound2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/video_play_brightness2"
             app:layout_constraintBottom_toBottomOf="@+id/my_video_brightness"
             app:layout_constraintEnd_toStartOf="@+id/my_video_brightness"
             app:layout_constraintTop_toTopOf="@+id/my_video_brightness" />
