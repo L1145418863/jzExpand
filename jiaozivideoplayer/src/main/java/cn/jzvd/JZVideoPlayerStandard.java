@@ -855,10 +855,15 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
         } else {
             mDialogVolumeImageView.setBackgroundResource(R.drawable.jz_add_volume);
         }
+        //记录声音大小
+        VariableUtil.volumeSize = volumePercent;
+
         if (volumePercent > 100) {
             volumePercent = 100;
+            VariableUtil.volumeSize = 100;
         } else if (volumePercent < 0) {
             volumePercent = 0;
+            VariableUtil.volumeSize = 0;
         }
         mDialogVolumeTextView.setText(volumePercent + "%");
         mDialogVolumeProgressBar.setProgress(volumePercent);
@@ -878,6 +883,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
 
     /**
      * 展示亮度弹框
+     *
      * @param brightnessPercent 亮度的值
      */
     @Override
@@ -915,6 +921,7 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
 
     /**
      * 创建 弹框的view
+     *
      * @param localView
      * @return
      */

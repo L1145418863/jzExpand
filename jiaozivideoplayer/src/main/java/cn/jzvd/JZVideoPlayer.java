@@ -568,11 +568,68 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         unFillPopup.setFocusable(true);
         unFillPopup.showAsDropDown(jz_show_popup);
 
+        SeekBar sound = popupVeiw.findViewById(R.id.my_video_sound);
+        SeekBar brightness = popupVeiw.findViewById(R.id.my_video_brightness);
+        try {
+            mGestureDownBrightness = Settings.System.getInt(getContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+            brightness.setProgress((int) (mGestureDownBrightness * 255));
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+        //获取系统最大声音 和当前音量
+        sound.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        sound.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            findGroupAndChild(popupVeiw);
+            findGroupAndChild(popupVeiw);//设置倍速的选择和改变
         }
         final LinearLayout ayout = popupVeiw.findViewById(R.id.my_jz_video_qx);
-        SetClarity(unFillPopup, ayout);
+        SetClarity(unFillPopup, ayout);//设置选集
+
+        sound.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                VariableUtil.volumeSize = progress;
+                mGestureDownVolume = progress;
+                int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                int deltaV = (int) (max * progress * 0.2 / mScreenHeight);
+                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0);
+                //Log.e("音量progress", "volumeSize->" + VariableUtil.volumeSize + "--progress->" + progress + "--deltaV->" + deltaV);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        brightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                VariableUtil.brightness = progress;
+
+                WindowManager.LayoutParams params = JZUtils.getWindow(getContext()).getAttributes();
+                params.screenBrightness = (float) progress / 255;
+                //Log.e("progress亮度",""+(float)progress/255);
+                VariableUtil.brightness = params.screenBrightness;
+                JZUtils.getWindow(getContext()).setAttributes(params);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         popupVeiw.setOnClickListener(new OnClickListener() {
             @Override
@@ -965,6 +1022,8 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
                         } else {
                             params.screenBrightness = (mGestureDownBrightness + deltaV) / 255;
                         }
+                        VariableUtil.brightness = params.screenBrightness;
+                        Log.e("progress亮度", "" + VariableUtil.brightness);
                         JZUtils.getWindow(getContext()).setAttributes(params);
                         //dialog中显示百分比
                         int brightnessPercent = (int) (mGestureDownBrightness * 100 / 255 + deltaY * 3 * 100 / mScreenHeight);
