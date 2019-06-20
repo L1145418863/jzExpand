@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -94,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
                         , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
             }
         });
+        jzvideoplayerstandard.setIsNotFullScreen(new JZVideoPlayerStandard.IsNotFullScreen() {
+            @Override
+            public void notFullScreen(int videoIndex) {
+                Toast.makeText(MainActivity.this, "正在播放第" + (videoIndex + 1) + "集", Toast.LENGTH_SHORT).show();
+            }
+        });
         jzvideoplayerstandard.startVideo();
         //设置全屏播放
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
@@ -109,6 +116,26 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    //切换选集的时候一定要调用jzvideoplayerstandard.setSelect(); 方法 不然会出现全屏后index显示错误
+    public void clickView(View view) {
+        int id = view.getId();
+        if (id == R.id.start1) {
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+            jzvideoplayerstandard.release();
+            jzvideoplayerstandard.setUp(list.get(0), 0
+                    , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
+            jzvideoplayerstandard.startVideo();
+            jzvideoplayerstandard.setSelect(01);
+        } else if (id == R.id.start2) {
+            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+            jzvideoplayerstandard.release();
+            jzvideoplayerstandard.setUp(list.get(1), 0
+                    , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
+            jzvideoplayerstandard.startVideo();
+            jzvideoplayerstandard.setSelect(1);
+        }
     }
 
     @Override

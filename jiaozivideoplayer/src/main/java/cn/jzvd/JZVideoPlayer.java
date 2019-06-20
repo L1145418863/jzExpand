@@ -150,7 +150,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     protected TextView select_index;
     private float mFloat;
     public PopupWindow popupWindow;
-    private float mySpeed = VariableUtil.speedSize;
+    private float mySpeed = VariableUtil.speedSize;//倍速功能
     public boolean isSelection = VariableUtil.isSelection;//是否显示选集按钮
     public PopupWindow selectionPopup;
 
@@ -164,6 +164,9 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         init(context);
     }
 
+    /**
+     * 释放所有视频
+     */
     public static void releaseAllVideos() {
         if ((System.currentTimeMillis() - CLICK_QUIT_FULLSCREEN_TIME) > FULL_SCREEN_NORMAL_DELAY) {
             Log.d(TAG, "releaseAllVideos");
@@ -173,6 +176,14 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 开始全屏
+     *
+     * @param context
+     * @param _class
+     * @param url
+     * @param objects
+     */
     public static void startFullscreen(Context context, Class _class, String url, Object... objects) {
         LinkedHashMap map = new LinkedHashMap();
         map.put(URL_KEY_DEFAULT, url);
@@ -181,6 +192,15 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         startFullscreen(context, _class, dataSourceObjects, 0, objects);
     }
 
+    /**
+     * 也是开始全屏
+     *
+     * @param context
+     * @param _class
+     * @param dataSourceObjects
+     * @param defaultUrlMapIndex
+     * @param objects
+     */
     public static void startFullscreen(Context context, Class _class, Object[] dataSourceObjects, int defaultUrlMapIndex, Object... objects) {
         hideSupportActionBar(context);
         JZUtils.setRequestedOrientation(context, FULLSCREEN_ORIENTATION);
@@ -209,6 +229,11 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 返回 用于全屏时点击返回键 回到小屏 和 其他回到小屏状态
+     *
+     * @return
+     */
     public static boolean backPress() {
         VariableUtil.isFullScreen = false;//是否处于全屏状态
         Log.i(TAG, "backPress");
@@ -237,13 +262,20 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         return false;
     }
 
+    /**
+     * 接退出全屏和小窗
+     */
     public static void quitFullscreenOrTinyWindow() {
-        //直接退出全屏和小窗
         JZVideoPlayerManager.getFirstFloor().clearFloatScreen();
         JZMediaManager.instance().releaseMediaPlayer();
         JZVideoPlayerManager.completeAll();
     }
 
+    /**
+     * 显示ActionBar 咱不知道是干啥用的(此注释是后来者写的 具体咱不清楚 可能得问原创)
+     *
+     * @param context 上下文
+     */
     @SuppressLint("RestrictedApi")
     public static void showSupportActionBar(Context context) {
         if (ACTION_BAR_EXIST && JZUtils.getAppCompActivity(context) != null) {
@@ -258,6 +290,11 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 隐藏ActionBar
+     *
+     * @param context 上下文
+     */
     @SuppressLint("RestrictedApi")
     public static void hideSupportActionBar(Context context) {
         if (ACTION_BAR_EXIST && JZUtils.getAppCompActivity(context) != null) {
@@ -273,14 +310,27 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 保存播放状态
+     *
+     * @param context
+     * @param url
+     */
     public static void clearSavedProgress(Context context, String url) {
         JZUtils.clearSavedProgress(context, url);
     }
 
+    /**
+     * 用户的行为
+     * @param jzUserEvent
+     */
     public static void setJzUserAction(JZUserAction jzUserEvent) {
         JZ_USER_EVENT = jzUserEvent;
     }
 
+    /**
+     * 播放或者继续播放
+     */
     public static void goOnPlayOnResume() {
         if (JZVideoPlayerManager.getCurrentJzvd() != null) {
             JZVideoPlayer jzvd = JZVideoPlayerManager.getCurrentJzvd();
@@ -290,7 +340,9 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
             }
         }
     }
-
+    /**
+     * 播放或者暂停
+     */
     public static void goOnPlayOnPause() {
         if (JZVideoPlayerManager.getCurrentJzvd() != null) {
             JZVideoPlayer jzvd = JZVideoPlayerManager.getCurrentJzvd();
@@ -305,6 +357,13 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 滑动自动改变 可能是用于listview等列表
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     public static void onScrollAutoTiny(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         int lastVisibleItem = firstVisibleItem + visibleItemCount;
         int currentPlayPosition = JZMediaManager.instance().positionInList;
@@ -330,6 +389,13 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    /**
+     * 释放所有列表的video
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     public static void onScrollReleaseAllVideos(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         int lastVisibleItem = firstVisibleItem + visibleItemCount;
         int currentPlayPosition = JZMediaManager.instance().positionInList;
@@ -816,7 +882,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
      * @param list       集 合
      * @return 判断条件
      */
-    private boolean ChangedVideo(int listSelect, List<Object[]> list) {
+    public boolean ChangedVideo(int listSelect, List<Object[]> list) {
         if (list.size() > listSelect) {
             VariableUtil.listSelect = listSelect;
             Log.e("listSelect", "" + listSelect);
@@ -1604,6 +1670,10 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
     public void dismissBrightnessDialog() {
 
     }
+
+    public static void setSelect(int listSelect){
+        VariableUtil.listSelect = listSelect;
+    };
 
     public static class JZAutoFullscreenListener implements SensorEventListener {
         @Override

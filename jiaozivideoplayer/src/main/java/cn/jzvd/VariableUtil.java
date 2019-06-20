@@ -11,4 +11,5 @@ public class VariableUtil {
     public static List<Object[]> list;          //集数列表
     public static boolean isFullScreen = false;//是否处于全屏状态
 
+    public static JZVideoPlayerStandard.IsNotFullScreen isNotFullScreen = null;
 }

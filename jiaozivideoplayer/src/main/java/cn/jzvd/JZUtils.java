@@ -129,6 +129,7 @@ public class JZUtils {
 
     /**
      * if url == null, clear all progress
+     * 这个适用于单视频进度保存
      *
      * @param context context
      * @param url     if url!=null clear this url progress
