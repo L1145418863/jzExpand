@@ -21,7 +21,7 @@
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
 
 
-  使用示例<br/>
+  使用示例   更具体用法 请看 \app\src\main\java\com\example\administrator\newjz\MainActivity <br/>
 
     布局引用与原版一致
 
