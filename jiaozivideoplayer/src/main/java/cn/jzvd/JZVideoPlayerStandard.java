@@ -128,10 +128,10 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
     /**
      * 设置播放形式和url
      *
-     * @param dataSourceObjects  播放的url 以及 清晰度
-     * @param defaultUrlMapIndex 如果有清晰度 判断是从那个清晰度开始播放
-     * @param screen             视频界面 的展示方式
-     * @param objects            视频标题
+     * @param dataSourceObjects   播放的url 以及 清晰度
+     * @param defaultUrlMapIndex  如果有清晰度 判断是从那个清晰度开始播放
+     * @param screen               视频界面 的展示方式
+     * @param objects              视频标题
      */
     public void setUp(Object[] dataSourceObjects, int defaultUrlMapIndex, int screen, Object... objects) {
         super.setUp(dataSourceObjects, defaultUrlMapIndex, screen, objects);

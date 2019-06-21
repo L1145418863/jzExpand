@@ -189,7 +189,7 @@ public class MyMusicPlayerView extends RelativeLayout {
                 return false;
             }
         });
-        //获取当前控件高度
+        /*//获取当前控件高度
         my_music_background.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -202,9 +202,8 @@ public class MyMusicPlayerView extends RelativeLayout {
                             my_music_background.getViewTreeObserver()
                                     .removeGlobalOnLayoutListener(this);
                         }
-                        thisViewHeight = my_music_background.getHeight();
                     }
-                });
+                });*/
         //播放完成
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -223,6 +222,7 @@ public class MyMusicPlayerView extends RelativeLayout {
         my_music_more.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                thisViewHeight = my_music_background.getHeight();
                 showPoupWind();
             }
         });
@@ -458,7 +458,7 @@ public class MyMusicPlayerView extends RelativeLayout {
     /**
      * 暂停播放
      */
-    private void MediaPause() {
+    public void MediaPause() {
         mediaPlayer.pause();
         status = MEDIA_STATUS_ISNOTSTART;
         my_music_start.setVisibility(VISIBLE);
@@ -471,7 +471,7 @@ public class MyMusicPlayerView extends RelativeLayout {
     /**
      * 视频 开始播放 继续播放 重新播放
      */
-    private void MediaStart() {
+    public void MediaStart() {
         if (seekTo >= 1000) {
             seekTo = 0;
         }
