@@ -276,19 +276,18 @@ public class MyMusicPlayerView extends RelativeLayout {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.my_music_bsbtn1) {
-                    changedSpeed(MEDIA_SPEED_1_0);
                     speedText = MEDIA_CHECKEDSPEED_1_0;
+                    changedSpeed(MEDIA_SPEED_1_0);
                 } else if (checkedId == R.id.my_music_bsbtn1_25) {
-                    changedSpeed(MEDIA_SPEED_1_25);
                     speedText = MEDIA_CHECKEDSPEED_1_25;
-                }
-                if (checkedId == R.id.my_music_bsbtn1_5) {
-                    changedSpeed(MEDIA_SPEED_1_5);
+                    changedSpeed(MEDIA_SPEED_1_25);
+                } else if (checkedId == R.id.my_music_bsbtn1_5) {
                     speedText = MEDIA_CHECKEDSPEED_1_5;
-                }
-                if (checkedId == R.id.my_music_bsbtn2) {
-                    changedSpeed(MEDIA_SPEED_2_0);
+                    changedSpeed(MEDIA_SPEED_1_5);
+
+                } else if (checkedId == R.id.my_music_bsbtn2) {
                     speedText = MEDIA_CHECKEDSPEED_2_0;
+                    changedSpeed(MEDIA_SPEED_2_0);
                 }
                 changedCheckedColor(my_music_bsgroup, checkedId);
             }
@@ -418,16 +417,13 @@ public class MyMusicPlayerView extends RelativeLayout {
         int temp;
         StringBuffer sb = new StringBuffer();
         temp = time / 3600;
-        if (temp != 0) {
+        if (temp != 0) {//时长不超过一小时则不添加
             sb.append((temp < 10) ? "0" + temp + ":" : "" + temp + ":");
         }
-
         temp = time % 3600 / 60;
         sb.append((temp < 10) ? "0" + temp + ":" : "" + temp + ":");
-
         temp = time % 3600 % 60;
         sb.append((temp < 10) ? "0" + temp : "" + temp);
-
         return sb.toString();
     }
 
@@ -496,12 +492,20 @@ public class MyMusicPlayerView extends RelativeLayout {
      */
     private void changedSpeed(float speed) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
-            anInt = (int) (anIntTemp / speed);
-            MediaStart();
+            if (!TextUtils.isEmpty(path)) {
+                mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
+                anInt = (int) (anIntTemp / speed);
+                MediaStart();
+            } else {
+                speedText = MEDIA_CHECKEDSPEED_1_0;
+                Toast.makeText(context, "无效播放地址", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
+    /**
+     * 初始化 动画
+     */
     private void initAnimation() {
         myAnimator = ObjectAnimator.ofFloat(my_music_image, "rotation", 0f, 360f);
         myAnimator.setDuration(25000);
