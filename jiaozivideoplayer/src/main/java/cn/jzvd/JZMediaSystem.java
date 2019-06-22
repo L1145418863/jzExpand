@@ -113,8 +113,8 @@ public class JZMediaSystem extends JZMediaInterface implements MediaPlayer.OnPre
         try {
             mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
             Log.d("setSpeed", "setSpeed" + speed);
-        } catch (NoClassDefFoundError e) {
-
+        } catch (Exception e) {
+            Log.e("异常",""+e);
         }
         mediaPlayer.start();
     }
