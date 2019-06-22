@@ -884,6 +884,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
      */
     public boolean ChangedVideo(int listSelect, List<Object[]> list) {
         if (list.size() > listSelect) {
+
             VariableUtil.listSelect = listSelect;
             Log.e("listSelect", "" + listSelect);
             dataSourceObjects = list.get(listSelect);
@@ -903,10 +904,33 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
             JZMediaManager.setCurrentDataSource(JZUtils.getCurrentFromDataSource(list.get(listSelect), currentUrlMapIndex));
             onStatePreparing();
             onEvent(JZUserAction.ON_CLICK_START_ERROR);
+
+            isNotFullScreen = VariableUtil.isNotFullScreen;
+            if(isNotFullScreen != null){
+                isNotFullScreen.notFullScreen(VariableUtil.listSelect);
+            }
+
             return false;
         } else {
             return false;
         }
+
+    }
+
+    IsNotFullScreen isNotFullScreen;
+
+    /**
+     * 当用户退出全屏后监听
+     * @param isNotFullScreen
+     */
+    public void setIsNotFullScreen(IsNotFullScreen isNotFullScreen) {
+        VariableUtil.isNotFullScreen = isNotFullScreen;
+        this.isNotFullScreen = isNotFullScreen;
+    }
+
+    //设置收回全屏监听
+    public interface IsNotFullScreen{
+        void notFullScreen(int videoIndex);
     }
 
     //显示倍速弹框

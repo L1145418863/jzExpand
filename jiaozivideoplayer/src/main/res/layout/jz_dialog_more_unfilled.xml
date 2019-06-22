@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
-            android:text="1X"
+            android:text="1.0X"
             android:textColor="#D8B076"
             android:textSize="16sp" />
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:button="@null"
-            android:text="2X"
+            android:text="2.0X"
             android:textColor="#ffffffff"
             android:textSize="16sp" />
     </LinearLayout>

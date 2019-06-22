@@ -167,9 +167,6 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             //隐藏倍速按钮
             video_speed.setVisibility(View.GONE);
 
-            if(isNotFullScreen != null){
-                isNotFullScreen.notFullScreen(VariableUtil.listSelect);
-            }
             //隐藏分集按钮
             select_index.setText(isSelection ? "选集" : "");
             //显示下一集按钮
@@ -202,21 +199,6 @@ public class JZVideoPlayerStandard extends JZVideoPlayer {
             JZVideoPlayerManager.setFirstFloor(this);
             backPress();
         }
-    }
-    IsNotFullScreen isNotFullScreen;
-
-    /**
-     * 当用户退出全屏后监听
-     * @param isNotFullScreen
-     */
-    public void setIsNotFullScreen(IsNotFullScreen isNotFullScreen) {
-        VariableUtil.isNotFullScreen = isNotFullScreen;
-        this.isNotFullScreen = isNotFullScreen;
-    }
-
-    //设置收回全屏监听
-    public interface IsNotFullScreen{
-        void notFullScreen(int videoIndex);
     }
 
     //播放速度，默认1

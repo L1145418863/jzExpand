@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(objects);
         list.add(objects1);*/
 
-        //jzvideoplayerstandard.addSelection(list);
+        jzvideoplayerstandard.addSelection(list);
         jzvideoplayerstandard.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(this)
                 .load("http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg")
@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 清晰度切换
          */
-        /*jzvideoplayerstandard.setUp(list.get(0), 0
-                , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");*/
+        jzvideoplayerstandard.setUp(list.get(0), 0
+                , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
 
         Object[] objects2 = new Object[3];
         LinkedHashMap map2 = new LinkedHashMap();
@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
          *
          * 我改的时候不小心错改了某个地方 咱也没找到 暂且这么写 不然会出现全屏后点击返回小屏播放时 小屏不播放的bug
          */
-        jzvideoplayerstandard.setUp(objects2,0
-                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL);
+        /*jzvideoplayerstandard.setUp(objects2,0
+                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL);*/
 
         jzvideoplayerstandard.setonVideoEndLinstener(new JZVideoPlayerStandard.onVideoEndLinstener() {
             @Override
