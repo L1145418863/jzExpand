@@ -23,6 +23,26 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
+        android:id="@+id/yinpin_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changedMusic"
+        android:text="音频第一集"
+        app:layout_constraintBottom_toTopOf="@+id/my_music_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start1" />
+
+    <Button
+        android:id="@+id/yinpin_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changedMusic"
+        android:text="音频第二集"
+        app:layout_constraintBottom_toTopOf="@+id/my_music_view"
+        app:layout_constraintEnd_toEndOf="@+id/start2"
+        app:layout_constraintTop_toBottomOf="@+id/start2" />
+
+    <Button
         android:id="@+id/start1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

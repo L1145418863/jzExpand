@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
          *
          * 我改的时候不小心错改了某个地方 咱也没找到 暂且这么写 不然会出现全屏后点击返回小屏播放时 小屏不播放的bug
          */
-        jzvideoplayerstandard.setUp(videoU,0
+        jzvideoplayerstandard.setUp(videoU, 0
                 , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL);
 
         jzvideoplayerstandard.setonVideoEndLinstener(new JZVideoPlayerStandard.onVideoEndLinstener() {
@@ -112,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "正在播放第" + (videoIndex + 1) + "集", Toast.LENGTH_SHORT).show();
             }
         });
-        jzvideoplayerstandard.startVideo();
+//        jzvideoplayerstandard.startVideo(); //开始方法
         //设置全屏播放
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
 
         //---------------------------------音频-------------------
-        musicView.setUp("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3","http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg");
+        musicView.setUp("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3", "http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg");
 
     }
 
@@ -138,14 +138,29 @@ public class MainActivity extends AppCompatActivity {
             jzvideoplayerstandard.setUp(list.get(0), 0
                     , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
             jzvideoplayerstandard.startVideo();
-            jzvideoplayerstandard.setSelect(01);
+            JZVideoPlayer.setSelect(0);
         } else if (id == R.id.start2) {
             Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
             jzvideoplayerstandard.release();
             jzvideoplayerstandard.setUp(list.get(1), 0
                     , JZVideoPlayerStandard.SCROLL_AXIS_HORIZONTAL, "饺子视频播放器功能添加");
             jzvideoplayerstandard.startVideo();
-            jzvideoplayerstandard.setSelect(1);
+            JZVideoPlayer.setSelect(1);
+        }
+    }
+
+    /**
+     * 改变音频播放
+     * @param view view
+     */
+    public void changedMusic(View view) {
+        int id = view.getId();
+        if (id == R.id.yinpin_1) {
+            musicView.MediaClear();
+            musicView.MediaChanged("https://onlyboss.oss-cn-beijing.aliyuncs.com/video/formal/zhushudong_20190601_zimu_whole/2_batch.mp4",true);
+        } else if (id == R.id.yinpin_2) {
+            musicView.MediaClear();
+            musicView.MediaChanged("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3",true);
         }
     }
 

@@ -17,9 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -51,10 +49,12 @@ public class MyMusicPlayerView extends RelativeLayout {
     public TextView my_music_endtime;
     public TextView my_music_showpopup;
     //变量
-    private int seekTo = 0;
-    private int anInt;
-    private int duration;
-    private int anIntTemp;
+    private boolean playNow;//切换后是否立即播放
+    private int duration;//音频总长度
+    private int handlerSeekTo = 0;
+    private int seconds;//记录handle执行的次数和SeekBar最大长度
+    private int secondsTemp;//用于保存变速后 一秒所代表的长度
+
     private int status = 0;
     private MediaPlayer mediaPlayer;
     private Context context;
@@ -65,8 +65,11 @@ public class MyMusicPlayerView extends RelativeLayout {
     private int soundSize = 10;
     private int speedText = 10001;
     private MusicPlayerComplete musicPlayerComplete;
+    private boolean isChanged = false;
+    private String imageUrl;
     //常量
     private final int SEEK_MAX = 1000;
+    private final int SECONDS_NOMAL_SPPED = 1000;
     private final int MEDIA_STATUS_ISNOTSTART = 0;//未开始播放
     private final int MEDIA_STATUS_ISSTART = 1;//已经开始播放
     private final int MEDIA_STATUS_ISEND = 2;//播放结束
@@ -87,15 +90,23 @@ public class MyMusicPlayerView extends RelativeLayout {
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            my_music_seek.setProgress(seekTo);//修改进度到---
-            seekTo++;
+            my_music_seek.setProgress(handlerSeekTo);//修改进度到---
+            handlerSeekTo++;
             //进度调 进度
-            if (seekTo >= SEEK_MAX) {
+            if (handlerSeekTo >= seconds) {
                 handler.removeCallbacksAndMessages(null);
+                handlerSeekTo = seconds;
+                status = MEDIA_STATUS_ISEND;
+                my_music_start.setImageResource(R.drawable.music_restart_normal);
+                stopAnimation();
+                //播放完成监听 外部方法
+                if (musicPlayerComplete != null) {
+                    musicPlayerComplete.musicComplete();
+                }
             } else {
-                handler.sendEmptyMessageDelayed(1, anInt);
+                handler.sendEmptyMessageDelayed(1, secondsTemp);
             }
-            my_music_time.setText(getTime(seekTo * anInt));
+            my_music_time.setText(getTime(handlerSeekTo * SECONDS_NOMAL_SPPED));
             return false;
         }
     });
@@ -168,8 +179,8 @@ public class MyMusicPlayerView extends RelativeLayout {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int progress = my_music_seek.getProgress();
-                mediaPlayer.seekTo(progress * anInt);
-                seekTo = progress;
+                mediaPlayer.seekTo(progress*1000);
+                handlerSeekTo = progress;
             }
         });
         //播放 暂停 重播
@@ -210,14 +221,7 @@ public class MyMusicPlayerView extends RelativeLayout {
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                seekTo = SEEK_MAX;
-                status = MEDIA_STATUS_ISEND;
-                my_music_start.setImageResource(R.drawable.music_restart_normal);
-                stopAnimation();
-                //播放完成监听 外部方法
-                if (musicPlayerComplete != null) {
-                    musicPlayerComplete.musicComplete();
-                }
+
             }
         });
         //点击更多功能
@@ -373,6 +377,7 @@ public class MyMusicPlayerView extends RelativeLayout {
      */
     public void setUp(String path, String imageUrl) {
         this.path = path;//播放地址
+        this.imageUrl = imageUrl;
         try {
             if (TextUtils.isEmpty(path)) {
                 //播放地址无效
@@ -386,22 +391,28 @@ public class MyMusicPlayerView extends RelativeLayout {
                 mediaPlayer.setDataSource(context, parse);
                 mediaPlayer.prepareAsync();
 
-                Log.e("总时长",""+mediaPlayer.getDuration());
+                Log.e("总时长", "" + mediaPlayer.getDuration());
 
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
                         try {
-                       /*     mediaPlayer.prepare();*/
+                            /*     mediaPlayer.prepare();*/
                             status = MEDIA_STATUS_ISNOTSTART;
-                            //视频总长度
+                            //音频总长度
                             duration = mediaPlayer.getDuration();
                             //seekbar最大长度
-                            anInt = duration / SEEK_MAX;
+                            seconds = duration / SEEK_MAX;
+                            my_music_seek.setMax(seconds);
                             //seekbar每一次更新的时间
-                            anIntTemp = anInt;
                             String time = getTime(duration);
                             my_music_endtime.setText(time);
+                            if (isChanged && playNow) {
+                                MediaStart();
+                            } else {
+                                secondsTemp = SECONDS_NOMAL_SPPED;
+                            }
+                            isChanged = false;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -488,11 +499,11 @@ public class MyMusicPlayerView extends RelativeLayout {
     }
 
     /**
-     * 视频 开始播放 继续播放 重新播放
+     * 音频 开始播放 继续播放 重新播放
      */
     public void MediaStart() {
-        if (seekTo >= 1000) {
-            seekTo = 0;
+        if (handlerSeekTo >= seconds) {
+            handlerSeekTo = 0;
         }
         status = MEDIA_STATUS_ISSTART;
         my_music_start.setImageResource(R.drawable.music_pause_normal);
@@ -504,10 +515,29 @@ public class MyMusicPlayerView extends RelativeLayout {
         startMyAnimation();
     }
 
+    /**
+     * 播放的地址发生改变
+     *
+     * @param musicUrl 播放地址
+     * @param playNow  是否立即播放
+     */
+    public void MediaChanged(String musicUrl, boolean playNow) {
+        isChanged = true;
+        this.playNow = playNow;
+        this.setUp(musicUrl, imageUrl);
+    }
+
+    /**
+     * 释放内存
+     */
     public void MediaClear() {
         try {
-            mediaPlayer.stop();
+            mediaPlayer.release();
+            handler.removeCallbacksAndMessages(null);
+            my_music_time.setText("00:00");
             mediaPlayer = null;
+            handlerSeekTo = 0;
+            my_music_seek.setProgress(0);
         } catch (Exception e) {
             Log.e("清理MediaPlayer", "" + e);
         }
@@ -522,7 +552,7 @@ public class MyMusicPlayerView extends RelativeLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!TextUtils.isEmpty(path)) {
                 mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
-                anInt = (int) (anIntTemp / speed);
+                secondsTemp = (int) (SECONDS_NOMAL_SPPED / speed);
                 MediaStart();
             } else {
                 speedText = MEDIA_CHECKEDSPEED_1_0;
