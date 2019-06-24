@@ -413,6 +413,7 @@ public class MyMusicPlayerView extends RelativeLayout {
                                 secondsTemp = SECONDS_NOMAL_SPPED;
                             }
                             isChanged = false;
+                            playNow = false;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
