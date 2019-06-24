@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.PlaybackParams;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -378,17 +380,34 @@ public class MyMusicPlayerView extends RelativeLayout {
             } else {
                 //有效播放地址
                 Uri parse = Uri.parse(path);
+                /*mediaPlayer.setDataSource(context, parse);*/
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.setDataSource(context, parse);
-                mediaPlayer.prepare();
-                status = MEDIA_STATUS_ISNOTSTART;
-                //视频总长度
-                duration = mediaPlayer.getDuration();
-                //seekbar最大长度
-                anInt = duration / SEEK_MAX;
-                //seekbar每一次更新的时间
-                anIntTemp = anInt;
-                String time = getTime(duration);
-                my_music_endtime.setText(time);
+                mediaPlayer.prepareAsync();
+
+                Log.e("总时长",""+mediaPlayer.getDuration());
+
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        try {
+                       /*     mediaPlayer.prepare();*/
+                            status = MEDIA_STATUS_ISNOTSTART;
+                            //视频总长度
+                            duration = mediaPlayer.getDuration();
+                            //seekbar最大长度
+                            anInt = duration / SEEK_MAX;
+                            //seekbar每一次更新的时间
+                            anIntTemp = anInt;
+                            String time = getTime(duration);
+                            my_music_endtime.setText(time);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -483,6 +502,15 @@ public class MyMusicPlayerView extends RelativeLayout {
         handler.removeCallbacksAndMessages(null);
         handler.sendEmptyMessageDelayed(1, 0);
         startMyAnimation();
+    }
+
+    public void MediaClear() {
+        try {
+            mediaPlayer.stop();
+            mediaPlayer = null;
+        } catch (Exception e) {
+            Log.e("清理MediaPlayer", "" + e);
+        }
     }
 
     /**
