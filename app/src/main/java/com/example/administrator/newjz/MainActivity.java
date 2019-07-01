@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Object[] objects = new Object[3];
         LinkedHashMap map = new LinkedHashMap();
         for (int i = 0; i < 2; i++) {
-            map.put(mediaName[i], "https://onlyboss.oss-cn-beijing.aliyuncs.com/video/formal/zhushudong_20190601_zimu/1_batch.mp4");
+            map.put(mediaName[i], "抱歉这个是我们公司的视频(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.mp4");
         }
         objects[0] = map;
         objects[1] = false;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Object[] objects1 = new Object[3];
         LinkedHashMap map1 = new LinkedHashMap();
         for (int i = 0; i < 2; i++) {
-            map1.put(mediaName[i], "http://ssb-video.oss-cn-qingdao.aliyuncs.com/Video_1003_20161027140007.mp4");
+            map1.put(mediaName[i], "抱歉这个是我们公司的视频(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.mp4");
         }
         objects1[0] = map1;
         objects1[1] = false;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         //jzvideoplayerstandard.addSelection(list);
         jzvideoplayerstandard.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(this)
-                .load("http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg")
+                .load("抱歉这个是我们公司的图片(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.jpg")
                 .into(jzvideoplayerstandard.thumbImageView);
         /**
          * 清晰度切换
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         Object[] videoU = new Object[3];
         LinkedHashMap map2 = new LinkedHashMap();
-        map2.put(JZVideoPlayer.URL_KEY_DEFAULT, "https://onlyboss.oss-cn-beijing.aliyuncs.com/video/formal/zhushudong_20190601_zimu_whole/2_batch.mp4");
+        map2.put(JZVideoPlayer.URL_KEY_DEFAULT, "抱歉这个是我们公司的视频(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.mp4");
         videoU[0] = map2;
         videoU[1] = false;
         videoU[2] = new HashMap<>();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
 
         //---------------------------------音频-------------------
-        musicView.setUp("https://onlyboss.oss-cn-beijing.aliyuncs.com/video_audio/zhanrundong/20190624/01/audio.mp3", "https://cn.bing.com/th?id=OHR.RedAnthiasCoralMayotte_ZH-CN5646370533_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp");
+        musicView.setUp("抱歉这个是我们公司的音频(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.mp3", "抱歉这个是我们公司的图片(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.jpg");
 
     }
 
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         int id = view.getId();
         if (id == R.id.yinpin_1) {
             musicView.MediaClear();
-            musicView.MediaChanged("https://onlyboss.oss-cn-beijing.aliyuncs.com/video_audio/zhanrundong/20190624/01/audio.mp3",true);
+            musicView.MediaChanged("抱歉这个是我们公司的音频(不允许外泄)连接我就先去掉了,等找到合适的我再换上,抱歉.mp3",true);
         } else if (id == R.id.yinpin_2) {
             musicView.MediaClear();
             musicView.MediaChanged("",true);
