@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;  //横向
 
         //---------------------------------音频-------------------
-        musicView.setUp("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3", "http://image.onlyboss.com/39/9ccef74e0006e114e1d894ae60ec7a.jpg");
+        musicView.setUp("https://onlyboss.oss-cn-beijing.aliyuncs.com/video_audio/zhanrundong/20190624/01/audio.mp3", "https://cn.bing.com/th?id=OHR.RedAnthiasCoralMayotte_ZH-CN5646370533_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp");
 
     }
 
@@ -157,10 +157,10 @@ public class MainActivity extends AppCompatActivity {
         int id = view.getId();
         if (id == R.id.yinpin_1) {
             musicView.MediaClear();
-            musicView.MediaChanged("https://onlyboss.oss-cn-beijing.aliyuncs.com/video/formal/zhushudong_20190601_zimu_whole/2_batch.mp4",true);
+            musicView.MediaChanged("https://onlyboss.oss-cn-beijing.aliyuncs.com/video_audio/zhanrundong/20190624/01/audio.mp3",true);
         } else if (id == R.id.yinpin_2) {
             musicView.MediaClear();
-            musicView.MediaChanged("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3",true);
+            musicView.MediaChanged("",true);
         }
     }
 

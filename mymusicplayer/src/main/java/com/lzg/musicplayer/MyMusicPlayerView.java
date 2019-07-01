@@ -2,6 +2,8 @@ package com.lzg.musicplayer;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
@@ -54,7 +56,8 @@ public class MyMusicPlayerView extends RelativeLayout {
     private int handlerSeekTo = 0;
     private int seconds;//记录handle执行的次数和SeekBar最大长度
     private int secondsTemp;//用于保存变速后 一秒所代表的长度
-
+    private HeadsetReceiver headsetReceiver; // 耳机连接广播
+    private AudioManager audioManager;//播放管理类
     private int status = 0;
     private MediaPlayer mediaPlayer;
     private Context context;
@@ -111,6 +114,7 @@ public class MyMusicPlayerView extends RelativeLayout {
         }
     });
 
+
     public MyMusicPlayerView(Context context) {
         this(context, null);
     }
@@ -123,10 +127,42 @@ public class MyMusicPlayerView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         this.context = context;
         findView(context);
+        initAudioManager();
+        initReceiver(context);
+    }
+
+    private void initAudioManager() {
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     /**
-     * 寻找控件
+     * 初始化耳机连接监听
+     *
+     * @param context
+     */
+    private void initReceiver(Context context) {
+        headsetReceiver = new HeadsetReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
+        context.registerReceiver(headsetReceiver, intentFilter);
+        headsetReceiver.setOnHeadsetDetectLintener(new HeadsetReceiver.OnHeadsetDetectLintener() {
+            @Override
+            public void isHeadseDetectConnected(boolean connected) {
+                if (connected) {
+                    //耳机已连接 do something...
+                    changeToHeadset();
+                    Log.e("外音播放", "" + connected);
+                } else {
+                    //耳机已断开 do something...
+                    changeToSpeaker();
+                    Log.e("外音播放", "" + connected);
+                }
+            }
+        });
+    }
+
+    /**
+     * 寻找布局 并初始化需要的东西
      *
      * @param context 上下文
      */
@@ -179,7 +215,7 @@ public class MyMusicPlayerView extends RelativeLayout {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int progress = my_music_seek.getProgress();
-                mediaPlayer.seekTo(progress*1000);
+                mediaPlayer.seekTo(progress * 1000);
                 handlerSeekTo = progress;
             }
         });
@@ -217,13 +253,6 @@ public class MyMusicPlayerView extends RelativeLayout {
                         }
                     }
                 });*/
-        //播放完成
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-
-            }
-        });
         //点击更多功能
         my_music_more.setOnClickListener(new OnClickListener() {
             @Override
@@ -514,6 +543,13 @@ public class MyMusicPlayerView extends RelativeLayout {
         handler.removeCallbacksAndMessages(null);
         handler.sendEmptyMessageDelayed(1, 0);
         startMyAnimation();
+        //播放完成
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+
+            }
+        });
     }
 
     /**
@@ -523,6 +559,9 @@ public class MyMusicPlayerView extends RelativeLayout {
      * @param playNow  是否立即播放
      */
     public void MediaChanged(String musicUrl, boolean playNow) {
+        my_music_time.setText("00:00");
+        my_music_endtime.setText("00:00");
+        speedText = MEDIA_CHECKEDSPEED_1_0;
         isChanged = true;
         this.playNow = playNow;
         this.setUp(musicUrl, imageUrl);
@@ -539,6 +578,7 @@ public class MyMusicPlayerView extends RelativeLayout {
             mediaPlayer = null;
             handlerSeekTo = 0;
             my_music_seek.setProgress(0);
+            this.getContext().unregisterReceiver(headsetReceiver);
         } catch (Exception e) {
             Log.e("清理MediaPlayer", "" + e);
         }
@@ -553,7 +593,10 @@ public class MyMusicPlayerView extends RelativeLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!TextUtils.isEmpty(path)) {
                 mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
+                String speedString = "已切换为<font color='#D8B076'>" + speed + "</font>倍速度播放";
+                new CenterToast(this.getContext(), speedString);
                 secondsTemp = (int) (SECONDS_NOMAL_SPPED / speed);
+                mediaPlayer.pause();
                 MediaStart();
             } else {
                 speedText = MEDIA_CHECKEDSPEED_1_0;
@@ -601,4 +644,20 @@ public class MyMusicPlayerView extends RelativeLayout {
             }
         }
     }
+
+    /**
+     * 切换到外放
+     */
+    public void changeToSpeaker() {
+        audioManager.setMode(AudioManager.MODE_NORMAL);
+        audioManager.setSpeakerphoneOn(true);
+    }
+
+    /**
+     * 切换到耳机模式
+     */
+    public void changeToHeadset() {
+        audioManager.setSpeakerphoneOn(false);
+    }
+
 }

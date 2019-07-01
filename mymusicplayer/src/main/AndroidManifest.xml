@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lzg.musicplayer" />
+    package="com.lzg.musicplayer">
+
+    <uses-permission android:name="android.permission.INTERNET " />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application>
+        <receiver android:name=".HeadsetReceiver" />
+    </application>
+</manifest>

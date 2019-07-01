@@ -97,10 +97,10 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="21dp"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="18dp"
             android:src="@drawable/music_icon_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
