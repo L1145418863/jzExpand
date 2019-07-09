@@ -13,7 +13,7 @@
             android:id="@+id/my_music_showpopup"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#0000"/>
+            android:background="#0000" />
 
         <ImageView
             android:id="@+id/my_music_background"
@@ -29,12 +29,12 @@
             android:id="@+id/my_music_image"
             android:layout_width="124dp"
             android:layout_height="124dp"
-            android:padding="4dp"
             android:background="@drawable/musicicon"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/my_music_start"
@@ -97,10 +97,10 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="24dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="18dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/music_icon_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +111,7 @@
             android:layout_height="44dp"
             android:layout_marginRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/my_music_time"
@@ -135,5 +135,13 @@
             app:layout_constraintStart_toEndOf="@+id/my_music_seek"
             app:layout_constraintTop_toTopOf="@+id/my_music_seek" />
     </android.support.constraint.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/my_music_loader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/music_player_progressbar"
+        android:visibility="gone" />
 
 </RelativeLayout>

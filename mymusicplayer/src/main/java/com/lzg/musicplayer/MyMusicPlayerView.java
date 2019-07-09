@@ -23,6 +23,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -50,6 +51,7 @@ public class MyMusicPlayerView extends RelativeLayout {
     public TextView my_music_time;
     public TextView my_music_endtime;
     public TextView my_music_showpopup;
+    public ProgressBar my_music_loader;
     //变量
     private boolean playNow;//切换后是否立即播放
     private int duration;//音频总长度
@@ -189,6 +191,7 @@ public class MyMusicPlayerView extends RelativeLayout {
         my_music_time = (TextView) view.findViewById(R.id.my_music_time);
         my_music_endtime = (TextView) view.findViewById(R.id.my_music_endtime);
         my_music_showpopup = (TextView) view.findViewById(R.id.my_music_showpopup);
+        my_music_loader = (ProgressBar) view.findViewById(R.id.my_music_loader);
 
         my_music_seek.setMax(SEEK_MAX);
     }
@@ -407,6 +410,8 @@ public class MyMusicPlayerView extends RelativeLayout {
     public void setUp(String path, String imageUrl) {
         this.path = path;//播放地址
         this.imageUrl = imageUrl;
+        my_music_loader.setVisibility(View.VISIBLE);
+        my_music_start.setVisibility(View.GONE);
         try {
             if (TextUtils.isEmpty(path)) {
                 //播放地址无效
@@ -426,6 +431,8 @@ public class MyMusicPlayerView extends RelativeLayout {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
                         try {
+                            my_music_loader.setVisibility(View.GONE);
+                            my_music_start.setVisibility(View.VISIBLE);
                             /*     mediaPlayer.prepare();*/
                             status = MEDIA_STATUS_ISNOTSTART;
                             //音频总长度
@@ -433,10 +440,11 @@ public class MyMusicPlayerView extends RelativeLayout {
                             //seekbar最大长度
                             seconds = duration / SEEK_MAX;
                             my_music_seek.setMax(seconds);
-                            //seekbar每一次更新的时间
+                            //时长
                             String time = getTime(duration);
                             my_music_endtime.setText(time);
                             if (isChanged && playNow) {
+                                secondsTemp = SECONDS_NOMAL_SPPED;
                                 MediaStart();
                             } else {
                                 secondsTemp = SECONDS_NOMAL_SPPED;
@@ -590,6 +598,9 @@ public class MyMusicPlayerView extends RelativeLayout {
      * @param speed
      */
     private void changedSpeed(float speed) {
+        if(popupWindow != null){
+            popupWindow.dismiss();
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!TextUtils.isEmpty(path)) {
                 mediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(speed));
@@ -651,6 +662,7 @@ public class MyMusicPlayerView extends RelativeLayout {
     public void changeToSpeaker() {
         audioManager.setMode(AudioManager.MODE_NORMAL);
         audioManager.setSpeakerphoneOn(true);
+        MediaPause();
     }
 
     /**
